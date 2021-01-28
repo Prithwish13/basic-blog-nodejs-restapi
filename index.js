@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const feedRouter = require('./routers/feed');
@@ -8,8 +9,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const multer = require('multer');
 
-const port =  4000;
-const MONGODB_URI="mongodb://localhost:27017/Blog";
+const port =  process.env.PORT || 4000;
+const MONGODB_URI=process.env.MONGO_URI;
 const fileStorage = multer.diskStorage({
     destination:(req,file,cb)=>{
         cb(null,'images')

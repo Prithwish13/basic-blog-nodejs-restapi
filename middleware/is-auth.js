@@ -9,7 +9,7 @@ module.exports = (req,res,next) =>{
         throw erro;
     }
     try {
-        decodedToken = jwt.verify(token,'secretPrithwish');
+        decodedToken = jwt.verify(token,process.env.SECRET);
     } catch (err) {
         err.statusCode = 500;
         throw err;
