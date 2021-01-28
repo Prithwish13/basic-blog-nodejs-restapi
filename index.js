@@ -51,10 +51,14 @@ app.use((error,req,res,next)=>{
 
 mongoose.connect(MONGODB_URI,{useNewUrlParser:true,useUnifiedTopology:true,useFindAndModify:false})
         .then(result=>{
-            app.listen(port,()=>{
+            const server = app.listen(port,()=>{
                 console.log('app is running');
             });
-            console.log('Database connected successfully')
+            const io = require('socket.io')(server);
+            io.on('connection',socket=>{
+                console.log('client connected')
+            })
+             console.log('Database connected successfully');
         }).catch(err=>{
             console.log(err);
         })
